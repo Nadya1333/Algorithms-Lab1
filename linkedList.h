@@ -1,14 +1,14 @@
-#ifndef BI_ALGO_LAB1_LINKED_LIST_H
-#define BI_ALGO_LAB1_LINKED_LIST_H
+#ifndef ALGO_LAB1_LINKED_LIST_H
+#define ALGO_LAB1_LINKED_LIST_H
 #include <initializer_list>
 #include <iostream>
 
 class LinkedList {
 public:
     LinkedList();       // default constructor
-    LinkedList(std::initializer_list<int> init_lst);    // init list constructor
     ~LinkedList();      // list destructor
 
+    // Methods
     void print();                   // console output
     void push_back(int value);      // add element in the end
     void push_front(int value);     // add element in the beginning
@@ -19,8 +19,7 @@ public:
     void pop_index(int index);      // delete element by index
     int find_value(int value);      // returns first position of element, -1 if not found
     bool find_at_index(int index, int value); // returns true if element at index == value, else returns false
-
-    [[nodiscard]] size_t getSize() const;     // returns length of list
+    void clear();                   // delete all elements from the list
 
 private:
     struct Node {
@@ -37,4 +36,4 @@ private:
     size_t size;    // length of list
 };
 
-#endif //BI_ALGO_LAB1_LINKED_LIST_H
+#endif //ALGO_LAB1_LINKED_LIST_H

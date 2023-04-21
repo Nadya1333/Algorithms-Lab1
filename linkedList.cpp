@@ -7,19 +7,6 @@ LinkedList::LinkedList() {
     this->size = 0;
 }
 
-// arguments constructor
-LinkedList::LinkedList(std::initializer_list<int> init_lst) {
-    this->size = init_lst.size();
-    this->head = new Node(*(init_lst.begin()), nullptr);
-    this->tail = head;
-    Node *prev = head;
-    for (int i = 1; i < this->size; i++) {
-        prev->next = new Node(*(init_lst.begin() + i), nullptr);
-        prev = prev->next;
-    }
-    this->tail = prev;
-}
-
 // console printing
 void LinkedList::print() {
     if (this->head != nullptr) {
@@ -62,7 +49,7 @@ void LinkedList::push_index(int index, int value) {
         std::cout << "Given index out of list borders" << std::endl;
     } else if (index == 0) {
         push_front(value);
-    } else if (index == size) {
+    } else if (index == this->size) {
         push_back(value);
     } else {
         Node *cur = head;
@@ -90,7 +77,9 @@ void LinkedList::pop_back() {
             tail->next = nullptr;
         }
         delete cur;
-        head = nullptr;
+        if (this->size == 0) {
+            head = nullptr;
+        }
     } else {
         std::cout << "Nothing to pop. List is empty!" << std::endl;
     }
@@ -198,9 +187,12 @@ bool LinkedList::find_at_index(int index, int value) {
     }
 }
 
-// returns length of list
-size_t LinkedList::getSize() const {
-    return this->size;
+// delete all elements from the list
+void LinkedList::clear() {
+    delete head;
+    this->head = nullptr;
+    this->tail = nullptr;
+    this->size = 0;
 }
 
 // list destructor
